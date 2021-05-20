@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<form>
+	<input type="text" class="url"/>
+	<button>변환!</button>
+</form>
+<div class="shortened-url"></div>
+<script>
+    const form = document.querySelector("form");
+    const inputUrl = document.querySelector(".url");
+    const shortenedUrl = document.querySelector(".shortened-url");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const url = `api/url`;
+        const options = {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            body: JSON.stringify({
+                originalUrl: inputUrl.value
+            })
+        };
+        fetch(url, options)
+            .then(response => response.text())
+			.then(text => shortenedUrl.textContent = text)
+    })
+</script>
+</body>
+</html>

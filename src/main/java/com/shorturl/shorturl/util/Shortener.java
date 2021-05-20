@@ -14,7 +14,7 @@ public class Shortener {
     public String encoding(long value) {
         final StringBuilder sb = new StringBuilder();
         do {
-            final int i = (int)(value % BASE62.length);
+            final int i = (int) (value % BASE62.length);
             sb.append(BASE62[i]);
             value /= BASE62.length;
         } while (value > 0);
