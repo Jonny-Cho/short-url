@@ -2,13 +2,11 @@ package com.shorturl.shorturl.controller;
 
 import com.shorturl.shorturl.dto.UrlRequestDto;
 import com.shorturl.shorturl.service.UrlService;
+import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -30,8 +28,7 @@ public class MainController {
     }
 
     @GetMapping("/{shorturl}")
-    public String redirect(final HttpServletResponse response, @PathVariable final String shorturl) {
-        log.info(shorturl);
+    public String redirect(@PathVariable @NotNull final String shorturl) {
         final String originalUrl = urlService.getOriginalUrlByShortUrl(shorturl.replace("http://localhost:8080/", ""));
         if (originalUrl != null) {
             return "redirect:" + "https://" + originalUrl;
