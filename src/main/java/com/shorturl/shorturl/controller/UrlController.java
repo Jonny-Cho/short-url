@@ -20,7 +20,7 @@ public class UrlController {
     @ResponseBody
     public String Shortening(@RequestBody final UrlRequestDto urlRequest) {
         log.info(urlRequest.getOriginalUrl());
-        return "localhost:8080/" + urlService.generateShortUrl(urlRequest);
+        return "15.165.88.81:8080/" + urlService.generateShortUrl(urlRequest);
     }
 
 }

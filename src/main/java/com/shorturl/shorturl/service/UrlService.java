@@ -34,14 +34,25 @@ public class UrlService {
     }
 
     private String newShortenedUrl(final String replacedUrl) {
-        final Url newUrl = new Url(replacedUrl, randomString.nextString());
+        final String shorteningKey = getShorteningKey();
+        final Url newUrl = new Url(replacedUrl, shorteningKey);
         final Url savedUrl = urlRepository.save(newUrl);
         return savedUrl.getShortenedUrl();
     }
 
+    private String getShorteningKey() {
+        Optional<Url> url;
+        String shortenedUrl;
+        do {
+            shortenedUrl = randomString.nextString();
+            url = urlRepository.findByShortenedUrl(shortenedUrl);
+        } while (!url.isPresent());
+        return shortenedUrl;
+    }
+
     public String getOriginalUrlByShortUrl(final String shortUrl) {
         return urlRepository.findByShortenedUrl(shortUrl)
-                .orElseThrow(() -> new IllegalStateException("DB에서 Shortening Key를 찾을 수 없습니다."))
-                .getOriginalUrl();
+                .map(Url::getOriginalUrl)
+                .orElse(null);
     }
 }
