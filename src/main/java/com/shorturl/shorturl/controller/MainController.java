@@ -13,22 +13,15 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class MainController {
 
-    private final UrlService urlService;
+    protected final UrlService urlService;
 
     @GetMapping("/")
     public String index() {
         return "index";
     }
 
-    @PostMapping("api/url")
-    @ResponseBody
-    public String Shortening(@RequestBody final UrlRequestDto urlRequest) {
-        log.info(urlRequest.getOriginalUrl());
-        return "localhost:8080/" + urlService.generateShortUrl(urlRequest);
-    }
-
     @GetMapping("/{shorturl}")
-    public String redirect(@PathVariable @NotNull final String shorturl) {
+    public String redirect(@PathVariable(value = "shorturl") @NotNull final String shorturl) {
         final String originalUrl = urlService.getOriginalUrlByShortUrl(shorturl.replace("http://localhost:8080/", ""));
         if (originalUrl != null) {
             return "redirect:" + "https://" + originalUrl;

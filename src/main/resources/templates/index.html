@@ -4,12 +4,56 @@
 	<meta charset="UTF-8">
 	<title>Title</title>
 </head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0 auto;
+        padding: 0;
+        max-width: 500px;
+    }
+
+    .container {
+        /*background-color: #0b1736;*/
+        padding: 40px 30px;
+    }
+
+    input {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 10px;
+        height: 50px;
+    }
+
+    .btn {
+        margin: 10px 0;
+        width: 100%;
+        background: #1b3987;
+        font-size: 20px;
+        line-height: 50px;
+        height: 50px;
+        color: white;
+    }
+	.btn:hover{
+		cursor:pointer
+	}
+
+    .shortened-url {
+        line-height: 50px;
+        height: 50px;
+    }
+
+</style>
 <body>
-<form>
-	<input type="text" class="url"/>
-	<button>변환!</button>
-</form>
-<div class="shortened-url"></div>
+<div class="container">
+	<form>
+		<input type="text" placeholder="Shorten your link" class="url" required/>
+		<button class="btn btn-submit">Shorten</button>
+	</form>
+	<div class="shortened-url"></div>
+</div>
 <script>
     const form = document.querySelector("form");
     const inputUrl = document.querySelector(".url");
@@ -30,7 +74,7 @@
         };
         fetch(url, options)
             .then(response => response.text())
-			.then(text => shortenedUrl.textContent = text)
+            .then(text => shortenedUrl.textContent = text)
     })
 </script>
 </body>
