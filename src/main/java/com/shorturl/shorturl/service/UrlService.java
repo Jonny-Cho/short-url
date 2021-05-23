@@ -4,7 +4,6 @@ import com.shorturl.shorturl.domain.Url;
 import com.shorturl.shorturl.dto.UrlRequestDto;
 import com.shorturl.shorturl.repository.UrlRepository;
 import com.shorturl.shorturl.util.RandomString;
-import com.shorturl.shorturl.util.Shortener;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,6 @@ import java.util.Optional;
 @Service
 public class UrlService {
 
-    private final Shortener base62Util;
     private final UrlRepository urlRepository;
     private final RandomString randomString;
 
