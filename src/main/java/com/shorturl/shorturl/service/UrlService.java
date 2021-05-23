@@ -24,8 +24,12 @@ public class UrlService {
         // https, http 없애기
         final String replacedUrl = urlRequest.getOriginalUrl().replace("https://", "").replace("http://", "");
 
-        final Optional<Url> url = urlRepository.findByOriginalUrl(replacedUrl);
-        if (url.isPresent()) return url.get().getShortenedUrl();
+        final Optional<Url> OptionalUrl = urlRepository.findByOriginalUrl(replacedUrl);
+        if (OptionalUrl.isPresent()) {
+            final Url url = OptionalUrl.get();
+            url.increaseRequestCount();
+            return url.getShortenedUrl();
+        }
         return newShortenedUrl(replacedUrl);
     }
 
@@ -38,7 +42,7 @@ public class UrlService {
     }
 
     public String getOriginalUrlByShortUrl(final String shortUrl) {
-        final Url url = urlRepository.findByShortenedUrl(shortUrl).orElseThrow(() -> new IllegalStateException("ㅇㄴㄴㅇ"));
+        final Url url = urlRepository.findByShortenedUrl(shortUrl).orElseThrow(() -> new IllegalStateException("DB에서 Shortening Key를 찾을 수 없습니다."));
         return url.getOriginalUrl();
     }
 }

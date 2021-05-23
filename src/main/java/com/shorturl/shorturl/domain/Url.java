@@ -18,13 +18,19 @@ public class Url {
 
     private String originalUrl;
     private String shortenedUrl;
+    private long requesetCount;
 
     public Url(final String replacedUrl) {
         this.originalUrl = replacedUrl;
+        this.requesetCount = 1L;
     }
 
     public void setShortenedUrl(final String shortenedUrl) {
         this.shortenedUrl = shortenedUrl;
+    }
+
+    public void increaseRequestCount() {
+        requesetCount++;
     }
 
 }

@@ -15,5 +15,5 @@
     * ver2. UUID를 Base62로 인코딩
 * [x] 동일한 URL에 대한 요청은 동일한 Shortening Key로 응답
 * [x] 동일한 URL에 대한 요청 수 정보를 가져야 한다(화면 제공 필수 아님)
-* [ ] Shortening된 URL을 요청받으면 원래 URL로 리다이렉트
+* [x] Shortening된 URL을 요청받으면 원래 URL로 리다이렉트
 * [ ] Unit test 및 Integration test 작성
