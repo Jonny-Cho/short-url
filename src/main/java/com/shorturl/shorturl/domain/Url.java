@@ -1,5 +1,6 @@
 package com.shorturl.shorturl.domain;
 
+import com.shorturl.shorturl.util.RandomString;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,13 +21,10 @@ public class Url {
     private String shortenedUrl;
     private long requesetCount;
 
-    public Url(final String replacedUrl) {
+    public Url(final String replacedUrl, final String shortenedUrl) {
         this.originalUrl = replacedUrl;
-        this.requesetCount = 1L;
-    }
-
-    public void setShortenedUrl(final String shortenedUrl) {
         this.shortenedUrl = shortenedUrl;
+        this.requesetCount = 1L;
     }
 
     public void increaseRequestCount() {
