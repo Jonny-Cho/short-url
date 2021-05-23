@@ -22,6 +22,7 @@ public class MainController {
 
     @GetMapping("/{shorturl}")
     public String redirect(@PathVariable(value = "shorturl") @NotNull final String shorturl) {
+        if("favicon.ico".equals(shorturl)) return "index";
         final String originalUrl = urlService.getOriginalUrlByShortUrl(shorturl.replace("http://localhost:8080/", ""));
         if (originalUrl != null) {
             return "redirect:" + "https://" + originalUrl;
