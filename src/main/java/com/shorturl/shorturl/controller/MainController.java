@@ -1,12 +1,13 @@
 package com.shorturl.shorturl.controller;
 
-import com.shorturl.shorturl.dto.UrlRequestDto;
 import com.shorturl.shorturl.service.UrlService;
 import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -15,6 +16,11 @@ public class MainController {
 
     protected final UrlService urlService;
 
+    @GetMapping("favicon.ico")
+    @ResponseBody
+    public void disableFavicon() {
+    }
+
     @GetMapping("/")
     public String index() {
         return "index";
@@ -22,8 +28,7 @@ public class MainController {
 
     @GetMapping("/{shorturl}")
     public String redirect(@PathVariable(value = "shorturl") @NotNull final String shorturl) {
-        if("favicon.ico".equals(shorturl)) return "index";
-        final String originalUrl = urlService.getOriginalUrlByShortUrl(shorturl.replace("http://localhost:8080/", ""));
+        final String originalUrl = urlService.getOriginalUrlByShortUrl(shorturl);
         if (originalUrl != null) {
             return "redirect:" + "https://" + originalUrl;
         }

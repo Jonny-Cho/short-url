@@ -16,6 +16,7 @@
         * 5 ~ 8자리의 랜덤한 문자를 사용
         * 중복의 가능성이 남아 있기 때문에 DB에 이미 존재하는 Shortening Key인지 체크해야함
 * [x] 동일한 URL에 대한 요청은 동일한 Shortening Key로 응답
-* [x] 동일한 URL에 대한 요청 수 정보를 가져야 한다(화면 제공 필수 아님)
+* [x] 동일한 URL에 대한 요청 수 정보를 가져야 함
 * [x] Shortening된 URL을 요청받으면 원래 URL로 리다이렉트
-* [ ] Unit test 및 Integration test 작성
+* [x] Unit test 작성
+* [ ] Integration test 작성

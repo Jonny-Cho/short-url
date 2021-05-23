@@ -40,7 +40,8 @@ public class UrlService {
     }
 
     public String getOriginalUrlByShortUrl(final String shortUrl) {
-        final Url url = urlRepository.findByShortenedUrl(shortUrl).orElseThrow(() -> new IllegalStateException("DB에서 Shortening Key를 찾을 수 없습니다."));
-        return url.getOriginalUrl();
+        return urlRepository.findByShortenedUrl(shortUrl)
+                .orElseThrow(() -> new IllegalStateException("DB에서 Shortening Key를 찾을 수 없습니다."))
+                .getOriginalUrl();
     }
 }
