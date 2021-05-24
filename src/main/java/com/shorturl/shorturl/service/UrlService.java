@@ -46,7 +46,7 @@ public class UrlService {
         do {
             shortenedUrl = randomString.nextString();
             url = urlRepository.findByShortenedUrl(shortenedUrl);
-        } while (!url.isPresent());
+        } while (url.isPresent());
         return shortenedUrl;
     }
 
