@@ -23,8 +23,7 @@ public class MainController {
 
     @GetMapping("favicon.ico")
     @ResponseBody
-    public void disableFavicon() {
-    }
+    public void disableFavicon() {}
 
     @GetMapping("/")
     public String index() {
@@ -35,7 +34,7 @@ public class MainController {
     public ResponseEntity redirect(@PathVariable(value = "shorturl") @NotNull final String shorturl) {
         final String originalUrl = urlService.getOriginalUrlByShortUrl(shorturl);
         if (originalUrl != null) {
-            HttpHeaders headers = new HttpHeaders();
+            final HttpHeaders headers = new HttpHeaders();
             headers.setLocation(URI.create("https://" + originalUrl));
             return new ResponseEntity(headers, HttpStatus.MOVED_PERMANENTLY);
         }
