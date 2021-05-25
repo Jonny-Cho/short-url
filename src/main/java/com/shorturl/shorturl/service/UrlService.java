@@ -2,6 +2,7 @@ package com.shorturl.shorturl.service;
 
 import com.shorturl.shorturl.domain.Url;
 import com.shorturl.shorturl.dto.UrlRequestDto;
+import com.shorturl.shorturl.exception.EmptyOriginalUrlException;
 import com.shorturl.shorturl.repository.UrlRepository;
 import com.shorturl.shorturl.util.RandomString;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class UrlService {
 
     @Transactional
     public String generateShortUrl(final UrlRequestDto urlRequest) {
-        if(isBlank(urlRequest.getOriginalUrl())) throw new IllegalArgumentException("originalUrl을 입력해주세요");
+        if(isBlank(urlRequest.getOriginalUrl())) throw new EmptyOriginalUrlException();
         final String replacedUrl = removeHttps(urlRequest.getOriginalUrl());
         final Optional<Url> OptionalUrl = urlRepository.findByOriginalUrl(replacedUrl);
         if (OptionalUrl.isPresent()) {
