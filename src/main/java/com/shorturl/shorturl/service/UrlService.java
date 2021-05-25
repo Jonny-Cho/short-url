@@ -21,8 +21,7 @@ public class UrlService {
     public String generateShortUrl(final UrlRequestDto urlRequest) {
         // TODO validation
 
-        // https, http 없애기
-        final String replacedUrl = urlRequest.getOriginalUrl().replace("https://", "").replace("http://", "");
+        final String replacedUrl = removeHttps(urlRequest.getOriginalUrl());
 
         final Optional<Url> OptionalUrl = urlRepository.findByOriginalUrl(replacedUrl);
         if (OptionalUrl.isPresent()) {
@@ -31,6 +30,10 @@ public class UrlService {
             return url.getShortenedUrl();
         }
         return newShortenedUrl(replacedUrl);
+    }
+
+    private String removeHttps(final String originalUrl) {
+        return originalUrl.replace("https://", "").replace("http://", "");
     }
 
     private String newShortenedUrl(final String replacedUrl) {
