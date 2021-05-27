@@ -2,7 +2,6 @@ package com.shorturl.shorturl.service;
 
 import com.shorturl.shorturl.domain.Url;
 import com.shorturl.shorturl.dto.UrlRequestDto;
-import com.shorturl.shorturl.exception.EmptyOriginalUrlException;
 import com.shorturl.shorturl.repository.UrlRepository;
 import com.shorturl.shorturl.util.RandomString;
 import lombok.RequiredArgsConstructor;
@@ -23,27 +22,25 @@ public class UrlService {
     private final RandomString randomString;
 
     @Transactional
-    public String generateShortUrl(final UrlRequestDto urlRequest) {
-        if(isBlank(urlRequest.getOriginalUrl())) throw new EmptyOriginalUrlException();
+    public String getShortUrl(final UrlRequestDto urlRequest) {
         final String replacedUrl = removeHttps(urlRequest.getOriginalUrl());
         final Optional<Url> OptionalUrl = urlRepository.findByOriginalUrl(replacedUrl);
         if (OptionalUrl.isPresent()) {
             final Url url = OptionalUrl.get();
             url.increaseRequestCount();
-            return url.getShortenedUrl();
+            return addPrefix(url.getShortenedUrl());
         }
-        return newShortenedUrl(replacedUrl);
+        return addPrefix(newShortenedUrl(replacedUrl));
+    }
+
+    private String addPrefix(final String newShortenedUrl) {
+        return "15.165.88.81:8080/" + newShortenedUrl;
     }
 
     public String getOriginalUrlByShortUrl(final String shortUrl) {
         return urlRepository.findByShortenedUrl(shortUrl)
                 .map(Url::getOriginalUrl)
                 .orElse(null);
-    }
-
-    private boolean isBlank(final String originalUrl) {
-        final String trimedUrl = originalUrl.trim();
-        return trimedUrl.isEmpty();
     }
 
     private String removeHttps(final String originalUrl) {
