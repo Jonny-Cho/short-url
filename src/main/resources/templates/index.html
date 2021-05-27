@@ -81,10 +81,6 @@
                 return response.json()
             })
             .then(json => {
-                console.log(json)
-                console.log(json.status)
-                console.log(json.status !== 200)
-                console.log(json.originalUrl)
                 if(json.code){
                     shortenedUrl.classList.add("error")
                 	shortenedUrl.textContent = json.message
