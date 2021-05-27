@@ -19,8 +19,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(Exception.class)
-    protected ResponseEntity<ErrorResponseDto> exception(final Exception e){
+    @ExceptionHandler(IllegalArgumentException.class)
+    protected ResponseEntity<ErrorResponseDto> exception(final IllegalArgumentException e){
         log.error("Exception", e);
         final ErrorResponseDto response = ErrorResponseDto.of(ErrorCode.INVALID_INPUT_VALUE, e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

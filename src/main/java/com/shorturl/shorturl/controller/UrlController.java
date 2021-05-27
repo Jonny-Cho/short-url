@@ -18,6 +18,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static com.shorturl.shorturl.service.UrlService.HTTPS;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
@@ -40,13 +42,13 @@ public class UrlController {
 
     private void canAccessUrl(final String originalUrl) {
         try {
-            URL url = new URL("https://" + originalUrl);
+            URL url = new URL(HTTPS + originalUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             br.close();
         } catch (Exception e) {
-            throw new IllegalStateException("접근 불가능한 url입니다.");
+            throw new IllegalArgumentException("접근 불가능한 url입니다.");
         }
     }
 
