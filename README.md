@@ -18,7 +18,7 @@ git clone https://github.com/Jonny-Cho/short-url.git
 ```yml
 spring:
   datasource:
-    url: jdbc:mysql://host:port/db
+    url: jdbc:mariadb://host:port/db
     username: username
     password: password
     driver-class-name: org.mariadb.jdbc.Driver
