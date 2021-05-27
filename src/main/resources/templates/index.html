@@ -45,6 +45,10 @@
         height: 50px;
     }
 
+    .shortened-url.error{
+		color:red
+	}
+
 </style>
 <body>
 <div class="container">
@@ -73,8 +77,23 @@
             })
         };
         fetch(url, options)
-            .then(response => response.text())
-            .then(text => shortenedUrl.textContent = text)
+            .then(response => {
+                return response.json()
+            })
+            .then(json => {
+                console.log(json)
+                console.log(json.status)
+                console.log(json.status !== 200)
+                console.log(json.originalUrl)
+                if(json.code){
+                    shortenedUrl.classList.add("error")
+                	shortenedUrl.textContent = json.message
+				} else {
+                	shortenedUrl.classList.remove("error")
+                    shortenedUrl.textContent = json.originalUrl
+				}
+            })
+			.catch(console.error)
     })
 </script>
 </body>
