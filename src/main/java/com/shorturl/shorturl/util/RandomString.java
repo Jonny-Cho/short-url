@@ -17,10 +17,10 @@ import static com.shorturl.shorturl.exception.RandomStringLengthException.PLEASE
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class RandomString {
 
-    private static final String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static final String lower = upper.toLowerCase();
-    private static final String digits = "0123456789";
-    private static final String alphanum = upper + lower + digits;
+    private static final String UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String LOWER = UPPER.toLowerCase();
+    private static final String DIGITS = "0123456789";
+    private static final String ALPHANUM = UPPER + LOWER + DIGITS;
     private static final int MIN_RANDOM_VALUE = 5;
     private static final int MAX_RANDOM_VALUE = 8;
 
@@ -36,7 +36,7 @@ public class RandomString {
     }
 
     private RandomString(final int length, final Random random) {
-        this(length, random, alphanum);
+        this(length, random, ALPHANUM);
     }
 
     private RandomString(final int length) {

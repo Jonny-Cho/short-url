@@ -18,6 +18,7 @@ public class UrlService {
     public static final String HTTPS = "https://";
     public static final String HTTP = "http://";
     public static final String EMPTY_STRING = "";
+    public static final String REAL_PREFIX = "15.165.88.81:8080/";
     private final UrlRepository urlRepository;
     private final RandomString randomString;
 
@@ -34,7 +35,7 @@ public class UrlService {
     }
 
     private String addPrefix(final String newShortenedUrl) {
-        return "15.165.88.81:8080/" + newShortenedUrl;
+        return REAL_PREFIX + newShortenedUrl;
     }
 
     public String getOriginalUrlByShortUrl(final String shortUrl) {

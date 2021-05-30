@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RandomStringTest {
 
-    private static String BASE62_REGEX = "^[A-Za-z0-9]{5,8}";
+    public static String BASE62_REGEX = "^[A-Za-z0-9]{5,8}";
 
     @Autowired
     private final RandomString randomString = new RandomString();
